@@ -1,0 +1,45 @@
+import socket
+import threading
+import user
+import json
+
+server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+
+port = 40674
+
+server.bind(('', port))
+print ("socket binded to %s" %(port))
+
+
+print ("socket is listening")
+
+ASCII_PALATTE = r"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+
+def receive():
+    while True:
+        frame, addr = server.recvfrom(4096)
+        if not user.hasUser(addr):
+            user.user(addr,frame)
+        else:
+            user.updateUser(addr,frame)
+
+        
+
+t = threading.Thread(target=receive, daemon=True)
+t.start()
+
+
+
+while True:
+    # send all user data to the clients
+    for x in user.users:
+        jsonString = json.dumps(x.dataAsDict())
+        for y in user.users:
+            if x.address != y.address:
+                server.sendto(jsonString.encode(), x.address)
+
+
+
+
+c.close()
