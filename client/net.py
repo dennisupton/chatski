@@ -4,6 +4,7 @@ import json
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 serverIP = ('localhost', 40674)
+s.bind(('0.0.0.0', 0))
 
 users = {}
 
@@ -12,9 +13,10 @@ def sendFrame(frame):
 
 def receive():
     while True:
-        userJSON, addr = s.recvfrom(4096)
-        user = json.loads(userJSON.decode())
-        users[addr] = user
+        if s:
+            userJSON, addr = s.recvfrom(4096)
+            user = json.loads(userJSON.decode())
+            users[addr] = user
 
         
 
