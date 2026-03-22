@@ -37,8 +37,7 @@ while True:
         jsonString = json.dumps(x.dataAsDict())
         for y in user.users:
             if x.address != y.address:
-                server.sendto(jsonString.encode(), x.address)
-
+                server.sendto(jsonString.encode(), y.address)
 
 
 

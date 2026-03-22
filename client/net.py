@@ -17,6 +17,7 @@ def receive():
             userJSON, addr = s.recvfrom(4096)
             user = json.loads(userJSON.decode())
             users[addr] = user
+            
 
         
 

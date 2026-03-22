@@ -20,8 +20,8 @@ while True:
     if len(net.users)>0:
         print("\033[2J\033[H", end="", flush=True)
         for address,user in net.users.items():
-            print(address,user)
             print(user["frame"])
+            print()
 
 
 
