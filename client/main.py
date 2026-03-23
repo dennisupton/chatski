@@ -22,6 +22,7 @@ while True:
         for address,user in net.users.items():
             print(user["frame"])
             print()
+    print("sent")
 
 
 
