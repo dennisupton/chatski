@@ -3,7 +3,7 @@ import threading
 import json
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-serverIP = ('localhost', 40674)
+serverIP = ('147.185.221.23', 17362)
 s.bind(('0.0.0.0', 0))
 
 users = {}
@@ -23,4 +23,3 @@ def receive():
 
 t = threading.Thread(target=receive, daemon=True)
 t.start()
-
