@@ -2,10 +2,16 @@ import cv2
 import net
 import image
 import time
+import readchar
 
 cap = cv2.VideoCapture(0)
 
 while True:
+    key = readchar.readkey()
+    if key == 'q':
+        break
+
+
     if not cap.isOpened():
         print("\033[2J\033[H", end="", flush=True)
         print("Could not access webcam")
@@ -22,6 +28,7 @@ while True:
         for address,user in net.users.items():
             print(user["frame"])
             print()
+        print("Press q to quit")
 
 
 
