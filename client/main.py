@@ -36,4 +36,3 @@ while True:
 
 
 cap.release()
-s.close()

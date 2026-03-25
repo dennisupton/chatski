@@ -5,12 +5,16 @@ import json
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 serverIP = ('viscous-persistent.gl.at.ply.gg',17664 )
 s.bind(("",0))
-
+connected = False
 users = {}
-print(s.getsockname())
 
-def sendFrame(frame):
-    s.sendto(frame.encode(), serverIP)
+def sendFrame(frame,username):
+    packet = json.dumps({"type":"frame","username":username,"frame":frame})
+    s.sendto(packet.encode(), serverIP)
+
+def ping(username):
+    packet = json.dumps({"type":"ping","username":username,"frame":"None"})
+    s.sendto(packet.encode(), serverIP)
 
 def receive():
     while True:
