@@ -22,4 +22,5 @@ def imgToRows(data: bytes):
             r,g,b = img.getpixel((x, y))
             row += rgbToAscii(r,g,b)
         rows += row+"\n"
+    rows = rows[0:len(rows)-2]
     return rows

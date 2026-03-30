@@ -6,7 +6,7 @@ import readchar
 import threading
 import signal
 import sys
-
+import config
 
 def quit(sig = None, frame = None):
     net.s.close()
@@ -15,20 +15,22 @@ def quit(sig = None, frame = None):
 
 signal.signal(signal.SIGINT, quit)
 
-
 def keybinds():
+    print(input(">"))
+    '''
     while True:
         key = readchar.readkey()
         if key == 'q':
             quit()
-
+    '''
 t = threading.Thread(target=keybinds, daemon=True)
-t.start()
+# t.start()
+
+config.checkConfig()
 
 cap = cv2.VideoCapture(0)
 
 while True:
-
     if net.connected:
         if not cap.isOpened():
             print("Could not access webcam")
@@ -40,7 +42,7 @@ while True:
             print("\033[2J\033[H", end="", flush=True)
             net.sendFrame(img)
             print(img)
-            print(net.username)
+            print(config.username)
             print()
         if len(net.users)>0:
             for address,user in net.users.items():
@@ -51,8 +53,5 @@ while True:
         print("\033[2J\033[H", end="", flush=True)
         net.ping()
         time.sleep(1)
-
-
-
 
 cap.release()

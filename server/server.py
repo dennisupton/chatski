@@ -4,18 +4,15 @@ import user
 import json
 import time
 
-
-
 TIMEOUT = 3 # seconds
 log = []
-
 
 port = 5005
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.bind(('127.0.0.1', port))
 
 
-log.append("Server is at port %s" %(port))
+log.append(f"Server is at port {port}")
 
 def receive():
     while True:
