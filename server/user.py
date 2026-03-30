@@ -4,14 +4,15 @@
 users = []
 
 class user:
-    def __init__(self,address,frame: str,lastPacket):
+    def __init__(self,address,frame: str,username,lastPacket):
         self.address = address
         self.frame = frame
         self.lastPacket = lastPacket
+        self.username = username
         users.append(self)
 
     def dataAsDict(self):
-        return {"address": self.address, "frame":self.frame.decode()}
+        return {"address": self.address, "frame":self.frame, "username":self.username}
 
 def hasUser(address):
     for i in users:
@@ -19,8 +20,10 @@ def hasUser(address):
             return True
     return False
 
-def updateUser(address,frame,lastPacket):
+def updateUser(address,frame,username,lastPacket):
     for i in users:
-        if i.address == address: # yes i know this isnt efficient but there are only gonna be like 4 users at once max 
+        if i.address == address:
             i.frame = frame
+            i.username = username
             i.lastPacket = lastPacket
+            

@@ -2,8 +2,8 @@ import io
 from PIL import Image
 
 
-IMG_MAX_WIDTH = 40
-IMG_MAX_HEIGHT = 40
+IMG_MAX_WIDTH = 50
+IMG_MAX_HEIGHT = 50
 
 ASCII_PALATTE = r"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 
