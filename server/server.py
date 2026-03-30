@@ -8,8 +8,9 @@ TIMEOUT = 3 # seconds
 log = []
 
 port = 5005
-server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server.bind(('127.0.0.1', port))
+server = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+server.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+server.bind(('::', port))
 
 
 log.append(f"Server is at port {port}")
