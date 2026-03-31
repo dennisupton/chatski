@@ -10,7 +10,7 @@ s.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
 s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
 
 #('viscous-persistent.gl.at.ply.gg',17664 )
-s.bind(("::1",0))
+#s.bind(("::1",0))
 
 connected = False
 lastServerPing = time.time()
