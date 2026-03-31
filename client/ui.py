@@ -1,5 +1,5 @@
 import config
-
+import image
 #┌ ┐ └ ┘ ─ │ ├ ┤ ┬ ┴ ┼ ╭ ╮ ╯ ╰
 
 showHelp = False
@@ -14,7 +14,7 @@ def printUI(img, users):
             print()
     if showHelp:
         print(" - Press q to quit")
-        print(" - Press d to toggle dynamic shading")
+        print(" - Press d to toggle dynamic shading"+toOnOff(image.dynamicShading))
     print("Press h to show help menu")
 
 def addBorder(img):
@@ -26,3 +26,9 @@ def addBorder(img):
     res.append("╰"+"─"*len(img[0])+"╯")
     res = "\n".join(res)
     return res
+
+
+def toOnOff(condition):
+    if condition:
+        return "(On)"
+    return "(Off)"

@@ -41,7 +41,7 @@ def imgToRows(data: bytes):
     rows = ""
     for y in range(h):
         row = ""
-        for x in range(w):
+        for x in range(w-1,0,-1):
             r,g,b = img.getpixel((x, y))
             row += rgbToAscii(r,g,b,imgRange)
         rows += row+"\n"
