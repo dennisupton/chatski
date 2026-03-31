@@ -18,7 +18,10 @@ log.append(f"Server is at port {port}")
 def receive():
     while True:
         packet, addr = server.recvfrom(1024)
-        packet = json.loads(packet.decode())
+        try:
+            packet = json.loads(packet.decode())
+        except:
+            pass
         if packet["type"] == "ping":
             sendPing(addr)
         elif  packet["type"] == "frame":

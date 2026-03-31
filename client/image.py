@@ -10,6 +10,9 @@ ASCII_PALATTE = r"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;
 def rgbToAscii(r,g,b):
     return ASCII_PALATTE[round((r+g+b)/3/255 * (len(ASCII_PALATTE)-1))]
 
+def getMinMax(data:bytes):
+    pass
+
 def imgToRows(data: bytes):
     img = Image.open(io.BytesIO(data)).convert("RGB")
     w = min(img.width, IMG_MAX_WIDTH)
