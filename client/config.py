@@ -15,8 +15,11 @@ def checkConfig():
                 data = tomllib.load(f)
             
             username = data["client"]["username"]
-            serverIP = (data["client"]["serverIP"] , int(data["client"]["serverPort"]))
-            
+            if not ":" in  data["client"]["serverIP"]:
+                serverIP = ("::ffff:"+data["client"]["serverIP"] , int(data["client"]["serverPort"]))
+            else:
+                serverIP = (data["client"]["serverIP"] , int(data["client"]["serverPort"]))
+
         except FileNotFoundError:
             createNewConfig()
         except tomli.TOMLDecodeError:
