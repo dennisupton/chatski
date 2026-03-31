@@ -9,29 +9,32 @@ import sys
 import config
 import ui
 
-def quit(sig = None, frame = None):
-    net.s.close()
-    print("Closed connection")
-    sys.exit(0)
 
-signal.signal(signal.SIGINT, quit)
 
-def keybinds():
-    print(input(">"))
-    '''
-    while True:
-        key = readchar.readkey()
-        if key == 'q':
-            quit()
-    '''
-t = threading.Thread(target=keybinds, daemon=True)
-# t.start()
+
 
 config.checkConfig()
 
+keysDown = []
+
+def keyboardListener():
+    global keysDown
+    while True:
+        key = readchar.readchar()
+        keysDown.append(key)
+
+thread = threading.Thread(target=keyboardListener, daemon=True)
+thread.start()
+
+
 cap = cv2.VideoCapture(0)
 
+
 while True:
+
+    if "q" in keysDown:
+        break
+    keysDown = []
     if net.connected:
         if not cap.isOpened():
             print("Could not access webcam")
@@ -47,5 +50,6 @@ while True:
         print("\033[2J\033[H", end="", flush=True)
         net.ping()
         time.sleep(1)
+
 
 cap.release()

@@ -47,11 +47,9 @@ def receive():
             elif packet["type"] == "ping":
                 lastServerPing = time.time()
                 connected = True
-                print("Connected")
             elif packet["type"] == "error":
                 lastServerPing = time.time()
                 connected = True
-                print("Connected")
 
 
 

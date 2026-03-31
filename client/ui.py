@@ -10,7 +10,7 @@ def printUI(img, users):
         for address,user in net.users.items():
             print(addBorder(user["frame"]))
             print()
-        print("Press q to quit")
+    print("Press q to quit")
 
 def addBorder(img):
     img = img.split("\n")
