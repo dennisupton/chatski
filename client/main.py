@@ -17,6 +17,8 @@ config.checkConfig()
 
 keysDown = []
 
+
+
 def keyboardListener():
     global keysDown
     while True:
@@ -34,6 +36,11 @@ while True:
 
     if "q" in keysDown:
         break
+    if "h" in keysDown:
+        ui.showHelp = not ui.showHelp
+    if "d" in keysDown:
+        image.dynamicShading = not image.dynamicShading
+    
     keysDown = []
     if net.connected:
         if not cap.isOpened():

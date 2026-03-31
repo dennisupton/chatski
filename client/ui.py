@@ -2,6 +2,8 @@ import config
 
 #┌ ┐ └ ┘ ─ │ ├ ┤ ┬ ┴ ┼ ╭ ╮ ╯ ╰
 
+showHelp = False
+
 def printUI(img, users):
     print(addBorder(img))
     print(config.username)
@@ -10,7 +12,10 @@ def printUI(img, users):
         for address,user in net.users.items():
             print(addBorder(user["frame"]))
             print()
-    print("Press q to quit")
+    if showHelp:
+        print(" - Press q to quit")
+        print(" - Press d to toggle dynamic shading")
+    print("Press h to show help menu")
 
 def addBorder(img):
     img = img.split("\n")
