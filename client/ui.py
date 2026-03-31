@@ -1,5 +1,6 @@
 import config
 import image
+import net
 #┌ ┐ └ ┘ ─ │ ├ ┤ ┬ ┴ ┼ ╭ ╮ ╯ ╰
 
 showHelp = False
@@ -11,6 +12,7 @@ def printUI(img, users):
     if len(users)>0:
         for address,user in net.users.items():
             print(addBorder(user["frame"]))
+            print(user["username"])
             print()
     if showHelp:
         print(" - Press q to quit")

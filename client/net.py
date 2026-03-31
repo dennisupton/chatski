@@ -43,7 +43,7 @@ def receive():
             packetJSON, addr = s.recvfrom(1024)
             packet = json.loads(packetJSON.decode())
             if packet["type"] == "userData":
-                users[addr] = user
+                users[packet["address"][0]] = packet
             elif packet["type"] == "ping":
                 lastServerPing = time.time()
                 connected = True
