@@ -7,6 +7,7 @@ import threading
 import signal
 import sys
 import config
+import ui
 
 def quit(sig = None, frame = None):
     net.s.close()
@@ -41,14 +42,7 @@ while True:
             img = image.imgToRows(encoded.tobytes())
             print("\033[2J\033[H", end="", flush=True)
             net.sendFrame(img)
-            print(img)
-            print(config.username)
-            print()
-        if len(net.users)>0:
-            for address,user in net.users.items():
-                print(user["frame"])
-                print()
-            print("Press q to quit")
+            ui.printUI(img,net.users)
     else:
         print("\033[2J\033[H", end="", flush=True)
         net.ping()
