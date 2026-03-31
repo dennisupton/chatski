@@ -15,6 +15,7 @@ def printUI(img, users):
     if showHelp:
         print(" - Press q to quit")
         print(" - Press d to toggle dynamic shading"+toOnOff(image.dynamicShading))
+        print(" - Press c to redo config")
     print("Press h to show help menu")
 
 def addBorder(img):

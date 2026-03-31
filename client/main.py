@@ -16,12 +16,13 @@ import ui
 config.checkConfig()
 
 keysDown = []
-
+pause = False
 
 
 def keyboardListener():
     global keysDown
-    while True:
+    global pause
+    while not pause:
         key = readchar.readchar()
         keysDown.append(key)
 
@@ -40,7 +41,10 @@ while True:
         ui.showHelp = not ui.showHelp
     if "d" in keysDown:
         image.dynamicShading = not image.dynamicShading
-    
+    if "c" in keysDown:
+        pause = True
+        config.createNewConfig()
+        pause = False
     keysDown = []
     if net.connected:
         if not cap.isOpened():
