@@ -45,6 +45,8 @@ while True:
         pause = True
         config.createNewConfig()
         pause = False
+    if "m" in keysDown:
+        image.mute = not image.mute
     keysDown = []
     if net.connected:
         if not cap.isOpened():

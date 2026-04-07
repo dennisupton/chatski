@@ -24,12 +24,15 @@ IMG_MAX_HEIGHT = 50
 
 ASCII_PALATTE = r"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
 dynamicShading = True
+mute = False
 
 def rgbToAscii(r,g,b, imgRange):
     global volume
     if dynamicShading:
         intensity = ((r+g+b)/3/255)/imgRange
-        intensity = min(intensity+ volume/100, 1)
+        if not mute:
+            intensity += volume/100
+        intensity = min(intensity, 1)
 
     else:
         intensity = ((r+g+b)/3/255)
