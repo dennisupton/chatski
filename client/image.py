@@ -79,12 +79,13 @@ def imgToRows(data: bytes):
 
     rows = ""
     for y in range(h):
-        row = ""
-        for x in range(w-1,0,-1):
-            r,g,b = img.getpixel((x, y))
-            row += rgbToAscii(r,g,b,imgRange)
+        if y == 14 and not subtitle == "":
+            row = str(subtitle).center(IMG_MAX_WIDTH-1)
+        else:
+            row = ""
+            for x in range(w-1,0,-1):
+                r,g,b = img.getpixel((x, y))
+                row += rgbToAscii(r,g,b,imgRange)
         rows += row+"\n"
     rows = rows[0:len(rows)-1]
-    if not subtitle == "":
-        rows[len(rows)-2] = subtitles
     return rows
