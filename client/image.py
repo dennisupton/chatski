@@ -30,7 +30,7 @@ def rgbToAscii(r,g,b, imgRange):
     global volume
     if dynamicShading:
         intensity = ((r+g+b)/3/255)/imgRange
-        if not mute:
+        if not mute and volume > 8:
             intensity += volume/100
         intensity = min(intensity, 1)
 
