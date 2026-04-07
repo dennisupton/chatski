@@ -18,6 +18,7 @@ def printUI(img, users):
         print(" - Press q to quit")
         print(" - Press d to toggle dynamic shading"+toOnOff(image.dynamicShading))
         print(" - Press c to redo config")
+    print(str(image.volume))
     print("Press h to show help menu")
 
 def addBorder(img):

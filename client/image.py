@@ -1,6 +1,23 @@
 import io
 from PIL import Image
+import sounddevice as sd
+import numpy as np
+import faulthandler
+faulthandler.enable()
 
+volume = 0.0
+def audio_callback(indata, frames, time, status):
+    global volume
+    volume = np.linalg.norm(indata) * 10
+    
+    
+audio = sd.InputStream(
+    samplerate=48000,     
+    channels=1,            
+    dtype='float32',      
+    callback=audio_callback
+)
+audio.start()
 
 IMG_MAX_WIDTH = 50
 IMG_MAX_HEIGHT = 50
@@ -9,9 +26,10 @@ ASCII_PALATTE = r"$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;
 dynamicShading = True
 
 def rgbToAscii(r,g,b, imgRange):
+    global volume
     if dynamicShading:
         intensity = ((r+g+b)/3/255)/imgRange
-        intensity = min(intensity, 1)
+        intensity = min(intensity+ volume/100, 1)
 
     else:
         intensity = ((r+g+b)/3/255)
