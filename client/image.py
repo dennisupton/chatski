@@ -19,7 +19,7 @@ audio = sd.InputStream(
 )
 audio.start()
 
-subtitle = "nothing"
+subtitle = ""
 
 def listenForSubtitle():
     global subtitle
@@ -79,7 +79,7 @@ def imgToRows(data: bytes):
 
     rows = ""
     for y in range(h):
-        if y == 14 and not subtitle == "":
+        if y == 14 and not subtitle == "" and not mute:
             row = str(subtitle).center(IMG_MAX_WIDTH-1)
         else:
             row = ""
