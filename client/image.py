@@ -2,8 +2,8 @@ import io
 from PIL import Image
 import sounddevice as sd
 import numpy as np
-import faulthandler
-faulthandler.enable()
+import speech_recognition as sr
+import threading
 
 volume = 0.0
 def audio_callback(indata, frames, time, status):
@@ -18,6 +18,24 @@ audio = sd.InputStream(
     callback=audio_callback
 )
 audio.start()
+
+subtitle = "nothing"
+
+def listenForSubtitle():
+    global subtitle
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        
+        r.adjust_for_ambient_noise(source)
+        while True:
+            audio = r.listen(source)
+            try:
+                subtitle = r.recognize_google(audio)
+            except Exception as e:
+                subtitle = str(e)
+
+subtitlesThread = threading.Thread(target=listenForSubtitle, daemon=True)
+subtitlesThread.start()
 
 IMG_MAX_WIDTH = 50
 IMG_MAX_HEIGHT = 50
@@ -67,4 +85,6 @@ def imgToRows(data: bytes):
             row += rgbToAscii(r,g,b,imgRange)
         rows += row+"\n"
     rows = rows[0:len(rows)-1]
+    if not subtitle == "":
+        rows[len(rows)-2] = subtitles
     return rows
