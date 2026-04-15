@@ -22,7 +22,7 @@ def checkConfig():
 
         except FileNotFoundError:
             createNewConfig()
-        except tomli.TOMLDecodeError:
+        except tomli_w.TOMLDecodeError:
             createNewConfig()
     else:
         createNewConfig()
@@ -38,6 +38,8 @@ def createNewConfig():
             "serverPort": input("Server Port: ")
         }
     }
+    if len(config["client"]["serverIP"]) > 0 and len(config["client"]["username"]) > 0 and len(config["client"]["serverPort"]) > 0:
+        return
     configFolderDir.mkdir(parents=True, exist_ok=True)
 
     with open(configFolderDir/ "client.toml", "wb") as f:
